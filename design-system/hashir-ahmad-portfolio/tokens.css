@@ -1,0 +1,50 @@
+/* Nocturne Basalt & Verdigris Jade — Design Tokens */
+:root {
+  /* Surfaces */
+  --bg-void: #080B0A;
+  --bg-surface: #0F1412;
+  --bg-elevated: #151C19;
+  --bg-recessed: #0B0F0D;
+  --bg-glass: rgba(15, 20, 18, 0.78);
+
+  /* Ink */
+  --text-primary: #F2EFE9;
+  --text-secondary: #B6C2BC;
+  --text-muted: #85948D;
+
+  /* Bespoke Non-AI Accents */
+  --accent-jade: #4FE3B5;
+  --accent-jade-dim: rgba(79, 227, 181, 0.14);
+  --on-accent-jade: #06130F;
+  --accent-copper: #E8B88A;
+  --accent-copper-dim: rgba(232, 184, 138, 0.14);
+
+  /* Borders & Focus */
+  --border-hairline: rgba(242, 239, 233, 0.08);
+  --border-strong: rgba(242, 239, 233, 0.15);
+  --border-jade: rgba(79, 227, 181, 0.32);
+  --ring-focus: #4FE3B5;
+  --color-error: #F87171;
+
+  /* Typography */
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-editorial: "Newsreader", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+
+  /* Spacing & Radii */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --radius-outer: 28px;
+  --radius-inner: 22px;
+  --radius-pill: 9999px;
+
+  /* Motion */
+  --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-lens: cubic-bezier(0.16, 1, 0.3, 1);
+}

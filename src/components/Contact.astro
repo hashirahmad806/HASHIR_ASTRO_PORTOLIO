@@ -1,0 +1,207 @@
+---
+import { PROFILE } from '../data/portfolio';
+---
+
+<section id="contact" class="py-24 sm:py-32 border-t border-[rgba(242,239,233,0.07)] relative overflow-hidden">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -bottom-36 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-[140px]"
+    style="background: radial-gradient(circle, rgba(79,227,181,0.2) 0%, transparent 70%);"
+  ></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 space-y-12">
+    <div class="lens-reveal space-y-4">
+      <div class="inline-flex items-center gap-3">
+        <span class="w-8 h-px bg-[#E8B88A]" aria-hidden="true"></span>
+        <span class="font-mono-tech text-xs uppercase tracking-[0.2em] text-[#E8B88A]">
+          Direct Recruiter & Builder Contact
+        </span>
+      </div>
+
+      <h2 class="font-display text-[clamp(2.15rem,4.5vw,3.5rem)] font-bold leading-[1.04] tracking-[-0.03em] text-[#F2EFE9]">
+        Let’s build something{' '}
+        <em class="font-editorial italic font-normal text-[#4FE3B5]">durable</em>{' '}
+        together
+      </h2>
+
+      <p class="text-base text-[#B6C2BC] max-w-[60ch] leading-relaxed">
+        Available for Software Engineering internships, Full-Stack & AI Engineer roles, and selective product builds. Reach out directly via email or compose a structured brief below.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Direct Contact Channels (5 cols) -->
+      <div class="lens-reveal lg:col-span-5 space-y-4">
+        <!-- Primary Email Card with Copy Button -->
+        <div class="bezel-outer">
+          <div class="bezel-inner p-5 space-y-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="font-mono-tech text-[10px] uppercase tracking-[0.16em] text-[#4FE3B5]">
+                  Primary Recruiter Email
+                </div>
+                <a
+                  href={`mailto:${PROFILE.email}`}
+                  class="font-display font-bold text-lg text-[#F2EFE9] hover:text-[#4FE3B5] transition-colors break-all mt-1 inline-block"
+                >
+                  {PROFILE.email}
+                </a>
+              </div>
+              <button
+                id="copy-email-btn"
+                type="button"
+                data-email={PROFILE.email}
+                class="min-h-[44px] px-3.5 rounded-xl border border-[#4FE3B5]/35 bg-[#4FE3B5]/10 font-mono-tech text-xs text-[#4FE3B5] hover:bg-[#4FE3B5] hover:text-[#06130F] transition-colors cursor-pointer shrink-0 active:scale-[0.97]"
+              >
+                Copy
+              </button>
+            </div>
+            <p id="copy-email-status" aria-live="polite" class="font-mono-tech text-[11px] text-[#85948D] min-h-[16px]">
+              Typical reply within 24 hours · Remote & Peshawar, PK
+            </p>
+          </div>
+        </div>
+
+        <!-- Secondary Channels -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+          <a
+            href={PROFILE.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-between min-h-[60px] px-5 py-3.5 rounded-2xl border border-[rgba(242,239,233,0.09)] bg-[#0F1412] hover:border-[#4FE3B5]/40 transition-colors"
+          >
+            <div>
+              <div class="font-mono-tech text-[10px] uppercase tracking-[0.14em] text-[#85948D]">LinkedIn</div>
+              <div class="font-display font-semibold text-sm text-[#F2EFE9]">in/hashir-ahmad</div>
+            </div>
+            <span class="font-mono-tech text-xs text-[#4FE3B5]" aria-hidden="true">Connect ↗</span>
+          </a>
+
+          <a
+            href={PROFILE.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-between min-h-[60px] px-5 py-3.5 rounded-2xl border border-[rgba(242,239,233,0.09)] bg-[#0F1412] hover:border-[#4FE3B5]/40 transition-colors"
+          >
+            <div>
+              <div class="font-mono-tech text-[10px] uppercase tracking-[0.14em] text-[#85948D]">WhatsApp / Phone</div>
+              <div class="font-display font-semibold text-sm text-[#F2EFE9]">{PROFILE.phoneDisplay}</div>
+            </div>
+            <span class="font-mono-tech text-xs text-[#4FE3B5]" aria-hidden="true">Message ↗</span>
+          </a>
+
+          <a
+            href={PROFILE.cvUrl}
+            download="Hashir_Ahmad_CV.pdf"
+            class="flex items-center justify-between min-h-[60px] px-5 py-3.5 rounded-2xl border border-[#E8B88A]/25 bg-[#0F1412] hover:border-[#E8B88A]/60 transition-colors"
+          >
+            <div>
+              <div class="font-mono-tech text-[10px] uppercase tracking-[0.14em] text-[#E8B88A]">Resume / CV (PDF)</div>
+              <div class="font-display font-semibold text-sm text-[#F2EFE9]">Hashir_Ahmad_CV.pdf</div>
+            </div>
+            <span class="font-mono-tech text-xs text-[#E8B88A]" aria-hidden="true">Download ↓</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Interactive Inquiry Brief Composer (7 cols) -->
+      <div class="lens-reveal lg:col-span-7">
+        <div class="bezel-outer">
+          <div class="bezel-inner p-6 sm:p-8 space-y-6">
+            <div class="flex items-center justify-between border-b border-[rgba(242,239,233,0.08)] pb-4">
+              <div>
+                <div class="font-mono-tech text-[10px] uppercase tracking-[0.16em] text-[#4FE3B5]">
+                  DIRECT BRIEF COMPOSER
+                </div>
+                <h3 class="font-display text-xl sm:text-2xl font-bold text-[#F2EFE9] mt-0.5">
+                  Send a Project or Hiring Note
+                </h3>
+              </div>
+              <span class="font-mono-tech text-[11px] text-[#85948D]">Instant Mailto + Copy</span>
+            </div>
+
+            <form id="contact-composer-form" class="space-y-5" novalidate>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <label for="contact-name" class="block font-mono-tech text-[11px] uppercase tracking-[0.14em] text-[#B6C2BC]">
+                    Your Name *
+                  </label>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    autocomplete="name"
+                    required
+                    placeholder="e.g., Ayesha Khan, Engineering Manager"
+                    class="w-full min-h-[48px] px-4 rounded-xl border border-[rgba(242,239,233,0.12)] bg-[#080B0A] text-[#F2EFE9] placeholder-[#85948D] text-sm focus:border-[#4FE3B5]"
+                  />
+                  <p id="err-name" class="font-mono-tech text-[11px] text-[#F87171] hidden"></p>
+                </div>
+
+                <div class="space-y-2">
+                  <label for="contact-email" class="block font-mono-tech text-[11px] uppercase tracking-[0.14em] text-[#B6C2BC]">
+                    Work or Personal Email *
+                  </label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                    placeholder="you@company.com"
+                    class="w-full min-h-[48px] px-4 rounded-xl border border-[rgba(242,239,233,0.12)] bg-[#080B0A] text-[#F2EFE9] placeholder-[#85948D] text-sm focus:border-[#4FE3B5]"
+                  />
+                  <p id="err-email" class="font-mono-tech text-[11px] text-[#F87171] hidden"></p>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label for="contact-topic" class="block font-mono-tech text-[11px] uppercase tracking-[0.14em] text-[#B6C2BC]">
+                  Inquiry Focus
+                </label>
+                <select
+                  id="contact-topic"
+                  name="topic"
+                  class="w-full min-h-[48px] px-4 rounded-xl border border-[rgba(242,239,233,0.12)] bg-[#080B0A] text-[#F2EFE9] text-sm focus:border-[#4FE3B5]"
+                >
+                  <option value="Full-Stack / AI Role Opportunity">Full-Stack / AI Engineering Role</option>
+                  <option value="Internship Opportunity">Software Engineering Internship</option>
+                  <option value="Astro / Full-Stack Freelance Build">Astro / Full-Stack Client Build</option>
+                  <option value="AI Agent / RAG Architecture Collaboration">AI Agent or RAG Collaboration</option>
+                </select>
+              </div>
+
+              <div class="space-y-2">
+                <label for="contact-message" class="block font-mono-tech text-[11px] uppercase tracking-[0.14em] text-[#B6C2BC]">
+                  Message *
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Share role details, project scope, timeline, or how we can collaborate..."
+                  class="w-full p-4 rounded-xl border border-[rgba(242,239,233,0.12)] bg-[#080B0A] text-[#F2EFE9] placeholder-[#85948D] text-sm resize-y focus:border-[#4FE3B5]"
+                ></textarea>
+                <p id="err-message" class="font-mono-tech text-[11px] text-[#F87171] hidden"></p>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <button type="submit" class="btn-jade-island flex-1 sm:flex-none justify-between">
+                  <span>Open Email Draft & Copy Brief</span>
+                  <span class="btn-badge" aria-hidden="true">↗</span>
+                </button>
+              </div>
+
+              <div
+                id="contact-form-status"
+                aria-live="polite"
+                class="hidden rounded-xl border border-[#4FE3B5]/35 bg-[#4FE3B5]/10 px-4 py-3 font-mono-tech text-xs text-[#4FE3B5]"
+              ></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

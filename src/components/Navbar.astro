@@ -1,0 +1,138 @@
+---
+import { PROFILE } from '../data/portfolio';
+
+const navLinks = [
+  { href: '#systems', label: 'Systems' },
+  { href: '#capabilities', label: 'Capabilities' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#credentials', label: 'Credentials' },
+  { href: '#github', label: 'GitHub' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<header class="fixed top-4 inset-x-0 z-50 px-4 sm:px-6 pointer-events-none">
+  <nav
+    aria-label="Primary navigation"
+    class="pointer-events-auto mx-auto max-w-5xl rounded-full border border-[rgba(242,239,233,0.1)] bg-[#0F1412]/80 backdrop-blur-2xl px-3 sm:px-5 py-2 shadow-[0_18px_45px_-18px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(242,239,233,0.06)] flex items-center justify-between gap-3"
+  >
+    <!-- Brand Mark -->
+    <a
+      href="#hero"
+      class="inline-flex items-center gap-2.5 min-h-[44px] px-2 rounded-full text-[#F2EFE9] font-display font-bold text-lg tracking-tight hover:text-[#4FE3B5] transition-colors"
+    >
+      <span
+        aria-hidden="true"
+        class="w-2.5 h-2.5 rounded-full bg-[#4FE3B5] shadow-[0_0_12px_rgba(79,227,181,0.65)]"
+      ></span>
+      <span>{PROFILE.shortName}<span class="text-[#E8B88A]">.</span></span>
+    </a>
+
+    <!-- Desktop Links -->
+    <ul class="hidden lg:flex items-center gap-1" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            data-nav-spy={link.href.slice(1)}
+            class="nav-anchor inline-flex items-center min-h-[44px] px-3.5 rounded-full text-[13.5px] font-medium text-[#B6C2BC] hover:text-[#F2EFE9] hover:bg-[#151C19]/80 transition-colors"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Right Controls: Lens Inspect Toggle + Command Palette + Mobile Toggle -->
+    <div class="flex items-center gap-2">
+      <button
+        id="lens-mode-toggle"
+        type="button"
+        aria-pressed="false"
+        title="Toggle Google-Lens optical inspection overlays"
+        class="inline-flex items-center gap-2 min-h-[44px] px-3.5 rounded-full border border-[rgba(242,239,233,0.12)] bg-[#151C19]/80 text-xs font-mono-tech text-[#B6C2BC] hover:text-[#4FE3B5] hover:border-[#4FE3B5]/40 transition-all cursor-pointer active:scale-[0.97]"
+      >
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 8V6a2 2 0 0 1 2-2h2" />
+          <path d="M16 4h2a2 2 0 0 1 2 2v2" />
+          <path d="M20 16v2a2 2 0 0 1-2 2h-2" />
+          <path d="M8 20H6a2 2 0 0 1-2-2v-2" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        <span class="hidden sm:inline">Lens Focus</span>
+      </button>
+
+      <button
+        id="open-command-btn"
+        type="button"
+        aria-label="Open command and agent palette (Ctrl+K)"
+        class="hidden sm:inline-flex items-center gap-2 min-h-[44px] px-3.5 rounded-full border border-[rgba(242,239,233,0.12)] bg-[#0B0F0D] text-xs font-mono-tech text-[#B6C2BC] hover:text-[#F2EFE9] hover:border-[#E8B88A]/45 transition-all cursor-pointer active:scale-[0.97]"
+      >
+        <span>Command</span>
+        <kbd class="px-1.5 py-0.5 rounded bg-[#151C19] border border-[rgba(242,239,233,0.1)] text-[10px] text-[#E8B88A]">
+          ⌘K
+        </kbd>
+      </button>
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+        aria-label="Toggle navigation menu"
+        class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(242,239,233,0.14)] bg-[#151C19] text-[#F2EFE9] cursor-pointer active:scale-95 transition-transform"
+      >
+        <span class="sr-only">Menu</span>
+        <div class="relative w-5 h-3.5 flex flex-col justify-between">
+          <span id="ham-top" class="block h-[1.5px] w-full bg-current rounded-full transition-transform duration-300 origin-center"></span>
+          <span id="ham-mid" class="block h-[1.5px] w-full bg-current rounded-full transition-opacity duration-200"></span>
+          <span id="ham-bot" class="block h-[1.5px] w-full bg-current rounded-full transition-transform duration-300 origin-center"></span>
+        </div>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Full-Screen Glass Mobile Drawer -->
+  <div
+    id="mobile-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+    class="pointer-events-auto fixed inset-0 z-40 hidden flex-col justify-between bg-[#080B0A]/92 backdrop-blur-3xl p-6 pt-24 pb-10 lg:hidden"
+  >
+    <nav aria-label="Mobile menu links">
+      <ul class="space-y-2" role="list">
+        {navLinks.map((link, idx) => (
+          <li>
+            <a
+              href={link.href}
+              class="mobile-nav-link flex items-center justify-between min-h-[52px] px-4 rounded-2xl border border-[rgba(242,239,233,0.06)] bg-[#0F1412]/70 text-xl font-display font-semibold text-[#F2EFE9] hover:border-[#4FE3B5]/35 hover:text-[#4FE3B5] transition-colors"
+            >
+              <span>{link.label}</span>
+              <span class="font-mono-tech text-xs text-[#85948D]">0{idx + 1}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex flex-col gap-3 pt-6 border-t border-[rgba(242,239,233,0.08)]">
+      <a
+        href={PROFILE.cvUrl}
+        download="Hashir_Ahmad_CV.pdf"
+        class="btn-jade-island w-full justify-between"
+      >
+        <span>Download Resume / CV</span>
+        <span class="btn-badge" aria-hidden="true">↗</span>
+      </a>
+      <button
+        id="mobile-command-trigger"
+        type="button"
+        class="btn-basalt-pill w-full"
+      >
+        Open Command & Agent Palette
+      </button>
+    </div>
+  </div>
+</header>

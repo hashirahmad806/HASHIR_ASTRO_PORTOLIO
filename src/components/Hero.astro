@@ -1,0 +1,269 @@
+---
+import { Image } from 'astro:assets';
+import hashirPhoto from '../assets/hashir.jpg';
+import { PROFILE } from '../data/portfolio';
+
+const cyclingRoles = [
+  'Autonomous LangGraph Agent Architect',
+  'Production RAG & Vector Search Engineer',
+  'Astro & React 19 Full-Stack Builder',
+  'Human Factors in AI · UET Peshawar',
+];
+---
+
+<section
+  id="hero"
+  data-section-spy="hero"
+  class="relative min-h-[100dvh] pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 overflow-hidden flex items-center"
+>
+  <!-- Scrubbed Parallax Atmospheric Orbs (Non-AI Jade & Champagne Copper) -->
+  <div
+    data-parallax-orb="0.22"
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-36 -left-32 w-[560px] h-[560px] rounded-full opacity-30 blur-[135px]"
+    style="background: radial-gradient(circle, rgba(79,227,181,0.26) 0%, transparent 70%);"
+  ></div>
+  <div
+    data-parallax-orb="-0.18"
+    aria-hidden="true"
+    class="pointer-events-none absolute bottom-0 -right-24 w-[480px] h-[480px] rounded-full opacity-25 blur-[140px]"
+    style="background: radial-gradient(circle, rgba(232,184,138,0.22) 0%, transparent 70%);"
+  ></div>
+
+  <!-- Interactive Ambient Cursor Optical Ring -->
+  <div
+    id="hero-optical-aura"
+    aria-hidden="true"
+    class="pointer-events-none absolute w-[420px] h-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 transition-opacity duration-500 hidden lg:block"
+    style="background: radial-gradient(circle, rgba(79,227,181,0.12) 0%, rgba(232,184,138,0.04) 45%, transparent 72%);"
+  ></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+      <!-- Left Editorial Column (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        <!-- Availability Pill -->
+        <div class="hero-stagger inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[#4FE3B5]/30 bg-[#0F1412]/90 shadow-[inset_0_1px_0_rgba(242,239,233,0.06)]">
+          <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4FE3B5] opacity-65"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#4FE3B5]"></span>
+          </span>
+          <span class="font-mono-tech text-[11px] sm:text-xs tracking-[0.08em] uppercase text-[#4FE3B5]">
+            {PROFILE.availability}
+          </span>
+        </div>
+
+        <!-- Kinetic Cycling Engineering Focus Line -->
+        <div class="hero-stagger flex items-center gap-3 min-h-[28px]">
+          <span class="w-8 h-px bg-[#E8B88A] shrink-0" aria-hidden="true"></span>
+          <div class="overflow-hidden relative flex-1">
+            <span
+              id="hero-role-ticker"
+              data-roles={JSON.stringify(cyclingRoles)}
+              class="inline-block font-mono-tech text-xs uppercase tracking-[0.16em] text-[#E8B88A]"
+            >
+              {cyclingRoles[0]}
+            </span>
+          </div>
+        </div>
+
+        <!-- Asymmetric Hero Headline -->
+        <h1 class="hero-stagger font-display text-[clamp(2.6rem,5.4vw,4.55rem)] font-bold leading-[0.98] tracking-[-0.035em] text-[#F2EFE9]">
+          {PROFILE.name} engineers systems that{' '}
+          <em class="font-editorial italic font-normal text-[#E8B88A] tracking-[-0.015em]">
+            think
+          </em>{' '}
+          and{' '}
+          <em class="font-editorial italic font-normal text-[#4FE3B5] tracking-[-0.015em]">ship</em><span class="text-[#4FE3B5]">.</span>
+        </h1>
+
+        <!-- Humanized Bio Copy -->
+        <p class="hero-stagger text-base sm:text-lg text-[#B6C2BC] leading-relaxed max-w-[60ch]">
+          Computer Science undergraduate at <strong class="font-semibold text-[#F2EFE9]">UET Peshawar (3.45 GPA)</strong> and former Full-Stack Development Intern at <strong class="font-semibold text-[#F2EFE9]">Wrapify Solutions</strong>. I build fast Astro and React web products, stateful LangGraph agents, and sub-20ms vector search pipelines shaped around human clarity.
+        </p>
+
+        <!-- Primary & Secondary Magnetic CTAs -->
+        <div class="hero-stagger flex flex-wrap items-center gap-3.5 pt-1">
+          <a href="#systems" data-magnetic class="btn-jade-island">
+            <span>Explore Systems</span>
+            <span class="btn-badge" aria-hidden="true">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+
+          <button
+            id="open-chatbot-hero"
+            type="button"
+            data-magnetic
+            class="btn-basalt-pill border-[#4FE3B5]/35 text-[#4FE3B5]"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            <span>Ask Hashir AI (LangGraph)</span>
+          </button>
+
+          <a
+            href={PROFILE.cvUrl}
+            download="Hashir_Ahmad_CV.pdf"
+            data-magnetic
+            class="btn-basalt-pill"
+          >
+            <svg class="w-4 h-4 text-[#E8B88A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span>Download CV</span>
+          </a>
+        </div>
+
+        <!-- Direct Recruiter & Builder Social Links -->
+        <div class="hero-stagger flex flex-wrap items-center gap-3 pt-2">
+          <span class="font-mono-tech text-[11px] uppercase tracking-[0.18em] text-[#85948D] mr-1">
+            Connect
+          </span>
+
+          <a
+            href={PROFILE.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile (opens in new tab)"
+            class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(242,239,233,0.1)] bg-[#0F1412] text-[#B6C2BC] hover:text-[#4FE3B5] hover:border-[#4FE3B5]/40 transition-all active:scale-95"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+          </a>
+
+          <a
+            href={PROFILE.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile (opens in new tab)"
+            class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(242,239,233,0.1)] bg-[#0F1412] text-[#B6C2BC] hover:text-[#4FE3B5] hover:border-[#4FE3B5]/40 transition-all active:scale-95"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a>
+
+          <a
+            href={`mailto:${PROFILE.email}`}
+            aria-label={`Email ${PROFILE.email}`}
+            class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(242,239,233,0.1)] bg-[#0F1412] text-[#B6C2BC] hover:text-[#E8B88A] hover:border-[#E8B88A]/40 transition-all active:scale-95"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </a>
+
+          <a
+            href={PROFILE.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp contact (opens in new tab)"
+            class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(242,239,233,0.1)] bg-[#0F1412] text-[#B6C2BC] hover:text-[#4FE3B5] hover:border-[#4FE3B5]/40 transition-all active:scale-95"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Optical Viewfinder Portrait Column (5 cols) -->
+      <div class="lg:col-span-5 flex flex-col items-center lg:items-end">
+        <div class="hero-lens-frame w-full max-w-[400px]" data-tilt>
+          <div class="bezel-outer">
+            <div class="bezel-inner lens-surface">
+              <!-- Optical Google-Lens Corner Brackets (visible & alive on portrait) -->
+              <div class="lens-corners !opacity-90" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+
+              <!-- Subtle Scan Beam -->
+              <div
+                aria-hidden="true"
+                class="optical-scan-beam pointer-events-none absolute inset-x-0 top-0 h-20 z-[2]"
+                style="background: linear-gradient(180deg, transparent 0%, rgba(79,227,181,0.18) 50%, transparent 100%);"
+              ></div>
+
+              <!-- Live Optical Reticle Tracking Ring -->
+              <div
+                id="portrait-reticle"
+                aria-hidden="true"
+                class="pointer-events-none absolute w-24 h-24 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#4FE3B5]/45 z-[3] opacity-0 transition-opacity duration-300 flex items-center justify-center"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-[#4FE3B5]"></span>
+              </div>
+
+              <!-- Viewfinder Top HUD Bar -->
+              <div class="relative z-[4] flex items-center justify-between px-4 py-3 border-b border-[rgba(242,239,233,0.08)] bg-[#080B0A]/80 backdrop-blur-md">
+                <span id="portrait-coords" class="font-mono-tech text-[10px] tracking-[0.14em] uppercase text-[#4FE3B5]">
+                  OPTICAL LOCK · 34.01° N
+                </span>
+                <span class="font-mono-tech text-[10px] tracking-[0.12em] uppercase text-[#B6C2BC]">
+                  HUMAN FACTORS AI
+                </span>
+              </div>
+
+              <!-- Portrait Image with Nocturnal Rim Integration -->
+              <div class="relative aspect-[4/4.6] overflow-hidden bg-[#0B0F0D]">
+                <Image
+                  src={hashirPhoto}
+                  alt="Hashir Ahmad — Full-Stack and AI Systems Engineer"
+                  width={800}
+                  height={920}
+                  fetchpriority="high"
+                  class="w-full h-full object-cover object-top scale-[1.01] contrast-[1.06] saturate-[0.74]"
+                />
+                <!-- Nocturne Studio Grading Vignette -->
+                <div
+                  aria-hidden="true"
+                  class="absolute inset-0 pointer-events-none"
+                  style="background: linear-gradient(180deg, rgba(8,11,10,0.22) 0%, rgba(8,11,10,0.12) 45%, rgba(8,11,10,0.94) 100%), radial-gradient(circle at 46% 38%, transparent 38%, rgba(8,11,10,0.78) 100%);"
+                ></div>
+
+                <!-- Floating Optical Verification Caption -->
+                <div class="absolute inset-x-4 bottom-4 z-[4] flex items-end justify-between gap-3">
+                  <div>
+                    <p class="font-display font-semibold text-base text-[#F2EFE9] leading-tight">
+                      {PROFILE.name}
+                    </p>
+                    <p class="font-mono-tech text-[11px] text-[#E8B88A] mt-0.5">
+                      Peshawar · Remote Worldwide
+                    </p>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full border border-[#4FE3B5]/35 bg-[#080B0A]/80 backdrop-blur-md font-mono-tech text-[10px] uppercase tracking-wider text-[#4FE3B5]">
+                    Verified Builder
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 Metric Anchors -->
+          <div class="grid grid-cols-3 gap-2.5 mt-3">
+            {PROFILE.snapshotMetrics.map((m) => (
+              <div class="rounded-2xl border border-[rgba(242,239,233,0.08)] bg-[#0F1412]/90 px-3 py-3 text-center shadow-[inset_0_1px_0_rgba(242,239,233,0.04)]">
+                <div class="font-display font-bold text-xl sm:text-2xl text-[#F2EFE9] leading-none">
+                  {m.value}
+                </div>
+                <div class="font-mono-tech text-[10px] uppercase tracking-[0.08em] text-[#4FE3B5] mt-1.5">
+                  {m.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

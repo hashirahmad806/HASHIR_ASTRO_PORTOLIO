@@ -1,0 +1,114 @@
+---
+import { PROFILE } from '../data/portfolio';
+---
+
+<div
+  id="command-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Command and Optical Lens Palette"
+  class="fixed inset-0 z-[90] hidden items-start justify-center pt-[12vh] p-4 bg-[#080B0A]/85 backdrop-blur-xl"
+>
+  <div id="command-modal-backdrop" class="absolute inset-0"></div>
+
+  <div class="relative z-10 w-full max-w-xl bezel-outer">
+    <div class="bezel-inner overflow-hidden">
+      <div class="flex items-center gap-3 px-5 py-4 border-b border-[rgba(242,239,233,0.08)] bg-[#0B0F0D]">
+        <span class="font-mono-tech text-xs text-[#4FE3B5]" aria-hidden="true">⌘</span>
+        <input
+          id="command-search-input"
+          type="text"
+          aria-label="Filter commands or run RAG demo"
+          placeholder="Jump to section, toggle Lens Focus, run RAG trace, or copy email..."
+          class="flex-1 bg-transparent text-sm text-[#F2EFE9] placeholder-[#85948D] focus:outline-none"
+        />
+        <button
+          id="command-modal-close"
+          type="button"
+          aria-label="Close command palette"
+          class="min-h-[36px] px-2.5 rounded-lg border border-[rgba(242,239,233,0.12)] font-mono-tech text-[11px] text-[#85948D] hover:text-[#F2EFE9] cursor-pointer"
+        >
+          ESC
+        </button>
+      </div>
+
+      <div id="command-list" class="p-3 space-y-1.5 max-h-[340px] overflow-y-auto">
+        <button
+          type="button"
+          data-cmd-action="open-chatbot"
+          data-cmd-label="Open Hashir Identity Chatbot (LangChain & LangGraph)"
+          class="cmd-item w-full min-h-[46px] px-4 rounded-xl flex items-center justify-between text-left hover:bg-[#151C19] transition-colors cursor-pointer"
+        >
+          <span class="text-sm text-[#F2EFE9]">Open Hashir Identity Chatbot (LangChain & LangGraph)</span>
+          <span class="font-mono-tech text-[10px] text-[#4FE3B5]">AI TWIN</span>
+        </button>
+
+        <button
+          type="button"
+          data-cmd-action="toggle-lens"
+          data-cmd-label="Toggle Google Lens Optical Focus Mode"
+          class="cmd-item w-full min-h-[46px] px-4 rounded-xl flex items-center justify-between text-left hover:bg-[#151C19] transition-colors cursor-pointer"
+        >
+          <span class="text-sm text-[#F2EFE9]">Toggle Google Lens Optical Focus Mode</span>
+          <span class="font-mono-tech text-[10px] text-[#4FE3B5]">OPTICAL</span>
+        </button>
+
+        <button
+          type="button"
+          data-cmd-action="run-rag"
+          data-cmd-label="Simulate LangGraph + Atlas Vector RAG Trace"
+          class="cmd-item w-full min-h-[46px] px-4 rounded-xl flex items-center justify-between text-left hover:bg-[#151C19] transition-colors cursor-pointer"
+        >
+          <span class="text-sm text-[#F2EFE9]">Simulate LangGraph + Atlas Vector RAG Trace</span>
+          <span class="font-mono-tech text-[10px] text-[#E8B88A]">DEMO</span>
+        </button>
+
+        <button
+          type="button"
+          data-cmd-action="copy-email"
+          data-cmd-label={`Copy Recruiter Email (${PROFILE.email})`}
+          class="cmd-item w-full min-h-[46px] px-4 rounded-xl flex items-center justify-between text-left hover:bg-[#151C19] transition-colors cursor-pointer"
+        >
+          <span class="text-sm text-[#F2EFE9]">Copy Recruiter Email ({PROFILE.email})</span>
+          <span class="font-mono-tech text-[10px] text-[#4FE3B5]">COPY</span>
+        </button>
+
+        <a
+          href={PROFILE.cvUrl}
+          download="Hashir_Ahmad_CV.pdf"
+          data-cmd-label="Download Resume / CV PDF"
+          class="cmd-item w-full min-h-[46px] px-4 rounded-xl flex items-center justify-between text-left hover:bg-[#151C19] transition-colors"
+        >
+          <span class="text-sm text-[#F2EFE9]">Download Resume / CV (PDF)</span>
+          <span class="font-mono-tech text-[10px] text-[#E8B88A]">PDF ↓</span>
+        </a>
+
+        {[
+          { href: '#systems', label: 'Go to Featured Engineering Systems', tag: '01' },
+          { href: '#capabilities', label: 'Go to Think & Execute Capability Workbench', tag: '02' },
+          { href: '#experience', label: 'Go to Wrapify Internship & Experience', tag: '03' },
+          { href: '#credentials', label: 'Go to 8 Verified Certifications', tag: '04' },
+          { href: '#github', label: 'Go to Live GitHub Activity', tag: '05' },
+          { href: '#contact', label: 'Go to Contact Composer', tag: '06' },
+        ].map((nav) => (
+          <a
+            href={nav.href}
+            data-cmd-nav
+            data-cmd-label={nav.label}
+            class="cmd-item w-full min-h-[46px] px-4 rounded-xl flex items-center justify-between text-left hover:bg-[#151C19] transition-colors"
+          >
+            <span class="text-sm text-[#B6C2BC]">{nav.label}</span>
+            <span class="font-mono-tech text-[10px] text-[#85948D]">#{nav.tag}</span>
+          </a>
+        ))}
+      </div>
+
+      <!-- Live Trace Output Drawer inside Palette -->
+      <div
+        id="command-output"
+        aria-live="polite"
+        class="hidden border-t border-[rgba(242,239,233,0.08)] bg-[#080B0A] p-4 font-mono-tech text-xs text-[#4FE3B5] space-y-1.5"
+      ></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,263 @@
+---
+import {
+  THINK_EXECUTE_PILLARS,
+  SKILL_NODES,
+  AGENT_LOOP_STEPS,
+} from '../data/portfolio';
+---
+
+<section id="capabilities" class="py-24 sm:py-32 border-t border-[rgba(242,239,233,0.07)] bg-[#0B0F0D]/65">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 space-y-20">
+    <!-- Part A: Think & Execute Philosophy -->
+    <div class="space-y-10">
+      <div class="lens-reveal flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-3">
+            <span class="w-8 h-px bg-[#E8B88A]" aria-hidden="true"></span>
+            <span class="font-mono-tech text-xs uppercase tracking-[0.2em] text-[#E8B88A]">
+              Engineering Philosophy & Capabilities
+            </span>
+          </div>
+
+          <h2 class="font-display text-[clamp(2.15rem,4.5vw,3.5rem)] font-bold leading-[1.04] tracking-[-0.03em] text-[#F2EFE9]">
+            Architecting software that{' '}
+            <em class="font-editorial italic font-normal text-[#4FE3B5]">thinks</em>{' '}
+            and{' '}
+            <em class="font-editorial italic font-normal text-[#E8B88A]">respects humans</em>
+          </h2>
+
+          <p class="text-base text-[#B6C2BC] max-w-[62ch] leading-relaxed">
+            Backed by Duke University’s <strong class="text-[#F2EFE9]">Human Factors in AI</strong> and hands-on MERN & Astro shipping, every system balances algorithmic power with transparent, predictable ergonomics.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4 Core Engineering Pillars -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {THINK_EXECUTE_PILLARS.map((pillar, idx) => (
+          <div class="lens-reveal bezel-outer flex flex-col">
+            <div class="bezel-inner lens-surface flex-1 p-6 flex flex-col justify-between gap-5">
+              <div class="lens-corners" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+
+              <div class="relative z-[2] space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="font-mono-tech text-[10px] uppercase tracking-[0.14em] text-[#85948D]">
+                    0{idx + 1} // PILLAR
+                  </span>
+                  <span class="px-2.5 py-0.5 rounded-full border border-[#4FE3B5]/25 bg-[#4FE3B5]/10 font-mono-tech text-[10px] text-[#4FE3B5]">
+                    {pillar.badge}
+                  </span>
+                </div>
+
+                <h3 class="font-display text-lg font-bold text-[#F2EFE9]">
+                  {pillar.title}
+                </h3>
+                <div class="font-mono-tech text-xs text-[#E8B88A]">
+                  {pillar.subtitle}
+                </div>
+                <p class="text-xs sm:text-sm text-[#B6C2BC] leading-relaxed">
+                  {pillar.summary}
+                </p>
+              </div>
+
+              <ul class="relative z-[2] pt-3 border-t border-[rgba(242,239,233,0.08)] space-y-1.5">
+                {pillar.highlights.map((h) => (
+                  <li class="flex items-start gap-2 text-xs text-[#B6C2BC]">
+                    <span class="text-[#4FE3B5] mt-0.5" aria-hidden="true">◆</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Part B: Interactive Capability & Code Workbench -->
+    <div class="lens-reveal grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
+      <!-- Left: Stack Module Selector + Live ReAct Loop Simulator (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 class="font-display text-2xl font-bold text-[#F2EFE9]">
+              Interactive Capability Workbench
+            </h3>
+            <p class="text-sm text-[#85948D]">
+              Select any module below to inspect production patterns and latency metrics.
+            </p>
+          </div>
+          <span class="font-mono-tech text-[11px] uppercase tracking-[0.14em] text-[#4FE3B5]">
+            {SKILL_NODES.length} Verified Nodes
+          </span>
+        </div>
+
+        <!-- Skill Node Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5" role="listbox" aria-label="Technical capability modules">
+          {SKILL_NODES.map((node, index) => (
+            <button
+              type="button"
+              role="option"
+              aria-selected={index === 0 ? 'true' : 'false'}
+              data-skill-btn={node.id}
+              class:list={[
+                'skill-node-btn text-left p-4 rounded-2xl border transition-all cursor-pointer min-h-[104px] flex flex-col justify-between active:scale-[0.98]',
+                index === 0
+                  ? 'bg-[#151C19] border-[#4FE3B5]/50 shadow-[0_0_24px_-8px_rgba(79,227,181,0.3)]'
+                  : 'bg-[#0F1412] border-[rgba(242,239,233,0.08)] hover:border-[rgba(242,239,233,0.22)]',
+              ]}
+            >
+              <div class="flex items-center justify-between gap-2 w-full">
+                <span class="font-mono-tech text-[10px] uppercase tracking-[0.14em] text-[#E8B88A]">
+                  {node.tag}
+                </span>
+                <span class="font-mono-tech text-[10px] text-[#4FE3B5]">
+                  {node.latency}
+                </span>
+              </div>
+
+              <div class="font-display font-bold text-base text-[#F2EFE9] my-1.5">
+                {node.name}
+              </div>
+
+              <div class="flex items-center justify-between text-[11px] font-mono-tech text-[#85948D] w-full pt-2 border-t border-[rgba(242,239,233,0.06)]">
+                <span>{node.tenure}</span>
+                <span class="text-[#B6C2BC]">{node.maturity}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        <!-- Live ReAct Cognitive State Loop -->
+        <div class="bezel-outer">
+          <div class="bezel-inner p-5 sm:p-6 space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[rgba(242,239,233,0.08)]">
+              <div>
+                <div class="font-mono-tech text-[10px] uppercase tracking-[0.16em] text-[#4FE3B5]">
+                  Cognitive Architecture // ReAct Cycle
+                </div>
+                <h4 class="font-display text-lg font-bold text-[#F2EFE9]">
+                  5-Stage Autonomous Execution Trace
+                </h4>
+              </div>
+
+              <button
+                id="loop-autoplay-btn"
+                type="button"
+                class="min-h-[44px] px-4 rounded-xl bg-[#4FE3B5] text-[#06130F] font-mono-tech text-xs font-medium cursor-pointer active:scale-[0.97] transition-transform"
+              >
+                Auto-Play Trace ▶
+              </button>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+              {AGENT_LOOP_STEPS.map((s, idx) => (
+                <button
+                  type="button"
+                  data-loop-step={s.step}
+                  class:list={[
+                    'loop-step-btn min-h-[68px] p-2.5 rounded-xl border text-left transition-all cursor-pointer',
+                    idx === 0
+                      ? 'bg-[#151C19] border-[#4FE3B5]/55'
+                      : 'bg-[#0B0F0D] border-[rgba(242,239,233,0.08)] hover:border-[rgba(242,239,233,0.2)]',
+                  ]}
+                >
+                  <div class="font-mono-tech text-[10px] text-[#85948D]">NODE {s.step}</div>
+                  <div class="font-display text-xs font-semibold text-[#F2EFE9] mt-1 leading-tight">
+                    {s.name}
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            <div id="loop-inspector-box" class="rounded-2xl border border-[rgba(242,239,233,0.09)] bg-[#080B0A] p-4 space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span id="loop-step-title" class="font-display font-semibold text-sm text-[#F2EFE9]">
+                  {AGENT_LOOP_STEPS[0].step}. {AGENT_LOOP_STEPS[0].name}
+                </span>
+                <span id="loop-step-metric" class="font-mono-tech text-[11px] text-[#4FE3B5]">
+                  {AGENT_LOOP_STEPS[0].metric}
+                </span>
+              </div>
+              <p id="loop-step-desc" class="text-xs sm:text-sm text-[#B6C2BC] leading-relaxed">
+                {AGENT_LOOP_STEPS[0].desc}
+              </p>
+              <div class="font-mono-tech text-[11px] text-[#E8B88A]">
+                Layer: <span id="loop-step-tech">{AGENT_LOOP_STEPS[0].tech}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Sticky Live Node Code & Architecture Inspector (5 cols) -->
+      <div class="lg:col-span-5 lg:sticky lg:top-28">
+        <div class="bezel-outer">
+          <div class="bezel-inner p-6 space-y-5">
+            <div class="flex items-start justify-between gap-3 pb-4 border-b border-[rgba(242,239,233,0.08)]">
+              <div>
+                <div id="skill-ins-tag" class="font-mono-tech text-[10px] uppercase tracking-[0.16em] text-[#4FE3B5]">
+                  NODE INSPECTOR // {SKILL_NODES[0].tag}
+                </div>
+                <h4 id="skill-ins-name" class="font-display text-xl sm:text-2xl font-bold text-[#F2EFE9] mt-1">
+                  {SKILL_NODES[0].name}
+                </h4>
+              </div>
+              <span id="skill-ins-maturity" class="px-2.5 py-1 rounded-lg border border-[#4FE3B5]/30 bg-[#0B0F0D] font-mono-tech text-[11px] text-[#4FE3B5]">
+                {SKILL_NODES[0].maturity}
+              </span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2.5 font-mono-tech text-center">
+              <div class="rounded-xl border border-[rgba(242,239,233,0.08)] bg-[#0B0F0D] p-3">
+                <div class="text-[10px] text-[#85948D] uppercase">Latency</div>
+                <div id="skill-ins-latency" class="text-sm font-medium text-[#4FE3B5] mt-1">
+                  {SKILL_NODES[0].latency}
+                </div>
+              </div>
+              <div class="rounded-xl border border-[rgba(242,239,233,0.08)] bg-[#0B0F0D] p-3">
+                <div class="text-[10px] text-[#85948D] uppercase">Tenure</div>
+                <div id="skill-ins-tenure" class="text-sm font-medium text-[#E8B88A] mt-1">
+                  {SKILL_NODES[0].tenure}
+                </div>
+              </div>
+              <div class="rounded-xl border border-[rgba(242,239,233,0.08)] bg-[#0B0F0D] p-3">
+                <div class="text-[10px] text-[#85948D] uppercase">Status</div>
+                <div class="text-sm font-medium text-[#F2EFE9] mt-1">Verified</div>
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <div class="font-mono-tech text-[10px] uppercase tracking-[0.14em] text-[#85948D]">
+                Architectural Role
+              </div>
+              <p id="skill-ins-role" class="text-sm text-[#B6C2BC] leading-relaxed">
+                {SKILL_NODES[0].role}
+              </p>
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex items-center justify-between font-mono-tech text-[11px]">
+                <span class="text-[#85948D]">Production Pattern</span>
+                <span id="skill-ins-lang" class="text-[#E8B88A]">{SKILL_NODES[0].language}</span>
+              </div>
+              <pre class="p-4 rounded-2xl border border-[rgba(242,239,233,0.08)] bg-[#080B0A] font-mono-tech text-xs text-[#4FE3B5] overflow-x-auto leading-relaxed"><code id="skill-ins-code">{SKILL_NODES[0].code}</code></pre>
+            </div>
+
+            <div class="pt-3 border-t border-[rgba(242,239,233,0.08)] flex items-center justify-between gap-2 font-mono-tech text-xs">
+              <span class="text-[#85948D]">Verified In:</span>
+              <a id="skill-ins-project" href="#systems" class="text-[#E8B88A] hover:text-[#4FE3B5] transition-colors">
+                {SKILL_NODES[0].projectLink} ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script id="skills-json-data" type="application/json" set:html={JSON.stringify(SKILL_NODES)} />
+  <script id="loop-json-data" type="application/json" set:html={JSON.stringify(AGENT_LOOP_STEPS)} />
+</section>

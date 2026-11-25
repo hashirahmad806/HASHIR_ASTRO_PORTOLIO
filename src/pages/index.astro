@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import RecruiterBrief from '../components/RecruiterBrief.astro';
+import Projects from '../components/Projects.astro';
+import CapabilityWorkbench from '../components/CapabilityWorkbench.astro';
+import ExperienceCerts from '../components/ExperienceCerts.astro';
+import GitHubPulse from '../components/GitHubPulse.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import CommandLensModal from '../components/CommandLensModal.astro';
+import IdentityChatbot from '../components/IdentityChatbot.astro';
+---
+
+<BaseLayout>
+  <Navbar />
+
+  <main id="main-content" tabindex="-1">
+    <Hero />
+    <RecruiterBrief />
+    <Projects />
+    <CapabilityWorkbench />
+    <ExperienceCerts />
+    <GitHubPulse />
+    <Contact />
+  </main>
+
+  <Footer />
+  <IdentityChatbot />
+  <CommandLensModal />
+</BaseLayout>

@@ -1,0 +1,282 @@
+---
+import { PROJECTS } from '../data/portfolio';
+
+const categories = [
+  { id: 'all', label: 'All Systems', count: PROJECTS.length },
+  { id: 'client', label: 'Client Deliveries', count: PROJECTS.filter((p) => p.category === 'client').length },
+  { id: 'ai', label: 'Agentic AI & RAG', count: PROJECTS.filter((p) => p.category === 'ai').length },
+  { id: 'ml', label: 'Deep Learning & CV', count: PROJECTS.filter((p) => p.category === 'ml').length },
+  { id: 'fullstack', label: 'Full-Stack Web', count: PROJECTS.filter((p) => p.category === 'fullstack').length },
+];
+
+function getBentoSpan(index: number) {
+  // Asymmetric layout on desktop (6-col grid), single-column on mobile
+  if (index === 0) return 'md:col-span-4';
+  if (index === 1) return 'md:col-span-2';
+  if (index === 2 || index === 3) return 'md:col-span-3';
+  if (index === 4) return 'md:col-span-4';
+  if (index === 5) return 'md:col-span-2';
+  return 'md:col-span-2';
+}
+---
+
+<section id="systems" class="py-24 sm:py-32 relative">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
+    <!-- Section Header -->
+    <div class="lens-reveal flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-3">
+          <span class="w-8 h-px bg-[#4FE3B5]" aria-hidden="true"></span>
+          <span class="font-mono-tech text-xs uppercase tracking-[0.2em] text-[#4FE3B5]">
+            Shipped Systems & Case Studies
+          </span>
+        </div>
+
+        <h2 class="font-display text-[clamp(2.15rem,4.5vw,3.5rem)] font-bold leading-[1.04] tracking-[-0.03em] text-[#F2EFE9]">
+          Featured{' '}
+          <em class="font-editorial italic font-normal text-[#E8B88A]">
+            engineering
+          </em>{' '}
+          deliveries
+        </h2>
+
+        <p class="text-base text-[#B6C2BC] max-w-[60ch] leading-relaxed">
+          From decoupled Astro commerce storefronts and clinical booking platforms to stateful LangGraph multi-agent workflows and TensorFlow vision classifiers. Hover any card or toggle <strong class="text-[#4FE3B5] font-medium">Lens Focus</strong> to inspect architecture telemetry.
+        </p>
+      </div>
+
+      <!-- Accessible Category Filter Bar -->
+      <div
+        role="tablist"
+        aria-label="Filter projects by discipline"
+        class="inline-flex flex-wrap xl:flex-nowrap items-center gap-1 p-1.5 rounded-2xl border border-[rgba(242,239,233,0.1)] bg-[#0F1412] shrink-0"
+      >
+        {categories.map((cat, idx) => (
+          <button
+            type="button"
+            role="tab"
+            data-project-filter={cat.id}
+            aria-selected={idx === 0 ? 'true' : 'false'}
+            class:list={[
+              'project-filter-btn min-h-[44px] px-3 rounded-xl font-mono-tech text-[11px] whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 active:scale-[0.97]',
+              idx === 0
+                ? 'bg-[#4FE3B5] text-[#06130F] font-medium'
+                : 'text-[#B6C2BC] hover:text-[#F2EFE9] hover:bg-[#151C19]',
+            ]}
+          >
+            <span>{cat.label}</span>
+            <span class="opacity-70 text-[10px]">({cat.count})</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Asymmetrical Double-Bezel Bento Grid -->
+    <div id="projects-bento-grid" class="grid grid-cols-1 md:grid-cols-6 gap-6">
+      {PROJECTS.map((project, index) => {
+        const isCopper = project.accentTone === 'copper';
+        const isJade = project.accentTone === 'jade';
+        const badgeAccent = isCopper
+          ? 'text-[#E8B88A] border-[#E8B88A]/30 bg-[#E8B88A]/10'
+          : isJade
+          ? 'text-[#4FE3B5] border-[#4FE3B5]/30 bg-[#4FE3B5]/10'
+          : 'text-[#B6C2BC] border-[rgba(242,239,233,0.16)] bg-[rgba(242,239,233,0.05)]';
+
+        return (
+          <article
+            data-project-card
+            data-category={project.category}
+            data-bento-span={getBentoSpan(index)}
+            data-tilt={project.featured ? '' : undefined}
+            class:list={['lens-reveal bezel-outer flex flex-col', getBentoSpan(index)]}
+          >
+            <div class="bezel-inner lens-surface flex-1 flex flex-col justify-between p-6 sm:p-7">
+              <!-- Google-Lens Viewfinder Brackets -->
+              <div class="lens-corners" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+
+              <div class="relative z-[2] space-y-5">
+                <!-- Window / Telemetry Header -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[rgba(242,239,233,0.08)]">
+                  <span class:list={['px-3 py-1 rounded-full border font-mono-tech text-[10px] uppercase tracking-[0.12em]', badgeAccent]}>
+                    {project.tag}
+                  </span>
+
+                  <span class="lens-telemetry-chip font-mono-tech text-[10px] text-[#85948D] truncate max-w-[200px]">
+                    {project.domain}
+                  </span>
+                </div>
+
+                <!-- Title & Human Impact -->
+                <div class="space-y-2.5">
+                  <div class="flex flex-wrap items-center gap-2">
+                    {project.metrics.map((metric) => (
+                      <span class="px-2.5 py-0.5 rounded-md bg-[#0B0F0D] border border-[rgba(242,239,233,0.08)] font-mono-tech text-[10px] text-[#E8B88A]">
+                        {metric}
+                      </span>
+                    ))}
+                  </div>
+
+                  <h3 class="font-display text-xl sm:text-2xl font-bold text-[#F2EFE9] tracking-[-0.02em] leading-snug">
+                    {project.title}
+                  </h3>
+
+                  <p class="text-sm text-[#B6C2BC] leading-relaxed">
+                    {project.shortDesc}
+                  </p>
+                </div>
+
+                <!-- Optical Lens Telemetry Breakdown -->
+                <div class="rounded-2xl border border-[rgba(242,239,233,0.07)] bg-[#0B0F0D]/90 p-3.5 space-y-1.5">
+                  <div class="flex items-center justify-between gap-2 font-mono-tech text-[10px] uppercase tracking-[0.12em]">
+                    <span class="text-[#4FE3B5]">Lens Architecture Scan</span>
+                    <span class="text-[#85948D]">{project.isClient ? 'Client Prod' : 'Open Source'}</span>
+                  </div>
+                  <p class="font-mono-tech text-xs text-[#F2EFE9]">
+                    {project.lensTelemetry.architecture}
+                  </p>
+                  <p class="text-xs text-[#85948D]">
+                    {project.humanImpact}
+                  </p>
+                </div>
+
+                <!-- Tech Stack Chips -->
+                <div class="flex flex-wrap gap-1.5">
+                  {project.tech.map((item) => (
+                    <span class="px-2.5 py-1 rounded-lg bg-[#0F1412] border border-[rgba(242,239,233,0.08)] font-mono-tech text-[11px] text-[#B6C2BC]">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Action Footer (44px+ touch targets) -->
+              <div class="relative z-[2] pt-6 mt-6 border-t border-[rgba(242,239,233,0.08)] flex flex-wrap items-center gap-2.5">
+                <button
+                  type="button"
+                  data-open-project={project.id}
+                  class="flex-1 min-h-[44px] px-4 rounded-xl border border-[rgba(242,239,233,0.14)] bg-[#0F1412] font-mono-tech text-xs text-[#F2EFE9] hover:border-[#4FE3B5]/50 hover:text-[#4FE3B5] transition-colors cursor-pointer active:scale-[0.98]"
+                >
+                  Inspect Architecture
+                </button>
+
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="min-h-[44px] px-4 rounded-xl bg-[#4FE3B5] text-[#06130F] font-mono-tech text-xs font-medium inline-flex items-center gap-1.5 hover:opacity-95 transition-opacity active:scale-[0.98]"
+                >
+                  <span>{project.liveUrl.includes('github.com') ? 'Repo' : 'Live'}</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+
+                {project.githubUrl && project.githubUrl !== project.liveUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${project.title} source code on GitHub`}
+                    class="w-11 h-11 rounded-xl border border-[rgba(242,239,233,0.14)] bg-[#0F1412] text-[#B6C2BC] hover:text-[#F2EFE9] hover:border-[#E8B88A]/50 inline-flex items-center justify-center transition-colors"
+                  >
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Accessible Case Study & Architecture Inspection Modal -->
+  <div
+    id="project-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="project-modal-title"
+    class="fixed inset-0 z-[80] hidden items-center justify-center p-4 sm:p-6 bg-[#080B0A]/85 backdrop-blur-xl"
+  >
+    <div id="project-modal-backdrop" class="absolute inset-0"></div>
+    <div class="relative z-10 w-full max-w-2xl bezel-outer max-h-[90dvh] flex flex-col">
+      <div class="bezel-inner p-6 sm:p-8 overflow-y-auto space-y-6">
+        <div class="flex items-start justify-between gap-4 pb-4 border-b border-[rgba(242,239,233,0.08)]">
+          <div>
+            <div id="project-modal-tag" class="font-mono-tech text-xs uppercase tracking-[0.16em] text-[#4FE3B5]">
+              ARCHITECTURE BRIEF
+            </div>
+            <h3 id="project-modal-title" class="font-display text-2xl sm:text-3xl font-bold text-[#F2EFE9] mt-1">
+              Project Title
+            </h3>
+            <p id="project-modal-client" class="font-mono-tech text-xs text-[#E8B88A] mt-1 hidden"></p>
+          </div>
+
+          <button
+            id="project-modal-close"
+            type="button"
+            aria-label="Close architecture modal"
+            class="w-11 h-11 rounded-full border border-[rgba(242,239,233,0.14)] bg-[#0F1412] text-[#B6C2BC] hover:text-[#F2EFE9] hover:border-[#4FE3B5]/50 inline-flex items-center justify-center cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="space-y-2">
+          <div class="font-mono-tech text-[11px] uppercase tracking-[0.14em] text-[#85948D]">
+            System Overview
+          </div>
+          <p id="project-modal-desc" class="text-sm sm:text-base text-[#B6C2BC] leading-relaxed"></p>
+        </div>
+
+        <div class="rounded-2xl border border-[#4FE3B5]/20 bg-[#0B0F0D] p-4 space-y-1.5">
+          <div class="font-mono-tech text-[10px] uppercase tracking-[0.14em] text-[#4FE3B5]">
+            Human-Centered Outcome
+          </div>
+          <p id="project-modal-impact" class="text-sm text-[#F2EFE9]"></p>
+        </div>
+
+        <div class="space-y-2.5">
+          <div class="font-mono-tech text-[11px] uppercase tracking-[0.14em] text-[#85948D]">
+            Key Engineering Deliverables
+          </div>
+          <ul id="project-modal-highlights" class="space-y-2"></ul>
+        </div>
+
+        <div class="space-y-2.5">
+          <div class="font-mono-tech text-[11px] uppercase tracking-[0.14em] text-[#85948D]">
+            Stack & Architecture
+          </div>
+          <div id="project-modal-tech" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="pt-4 border-t border-[rgba(242,239,233,0.08)] flex flex-wrap gap-3">
+          <a
+            id="project-modal-live"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-jade-island flex-1 justify-between"
+          >
+            <span>Open Live / Deployment</span>
+            <span class="btn-badge" aria-hidden="true">↗</span>
+          </a>
+          <a
+            id="project-modal-github"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-basalt-pill"
+          >
+            View Source on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Structured JSON for client inspector modal -->
+  <script id="projects-json-data" type="application/json" set:html={JSON.stringify(PROJECTS)} />
+</section>

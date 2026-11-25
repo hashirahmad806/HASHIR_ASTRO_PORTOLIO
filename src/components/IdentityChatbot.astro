@@ -1,0 +1,220 @@
+---
+import { PROFILE } from '../data/portfolio';
+
+const chatApiBase = import.meta.env.PUBLIC_CHAT_API_URL || 'http://127.0.0.1:8000';
+
+const quickPrompts = [
+  'Tell me about Hashir and his UET Peshawar CGPA',
+  'What did he build at Wrapify Solutions and Triostep?',
+  'Explain his LangGraph & Vector Search RAG architecture',
+  'Check his live GitHub contributions and repositories',
+  'I want to ask about project pricing or hire him directly',
+];
+---
+
+<!-- Floating Bottom-Right Launcher + Direct WhatsApp Shortcut -->
+<div class="fixed bottom-5 right-5 z-[65] flex items-center gap-2.5">
+  <a
+    href={PROFILE.whatsappUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Direct WhatsApp message to Hashir Ahmad"
+    title="Message Hashir directly on WhatsApp"
+    data-magnetic
+    class="hidden sm:inline-flex items-center gap-2 min-h-[48px] px-4 rounded-full border border-[#E8B88A]/40 bg-[#0F1412]/92 backdrop-blur-xl text-[#E8B88A] font-mono-tech text-xs shadow-[0_14px_34px_-12px_rgba(0,0,0,0.8)] hover:border-[#E8B88A] hover:bg-[#151C19] transition-all active:scale-[0.97]"
+  >
+    <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+    </svg>
+    <span>WhatsApp Hashir</span>
+  </a>
+
+  <button
+    id="chatbot-launcher"
+    type="button"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    aria-controls="identity-chatbot-modal"
+    data-magnetic
+    class="group inline-flex items-center gap-3 min-h-[50px] pl-3.5 pr-4 rounded-full border border-[#4FE3B5]/45 bg-[#0F1412]/92 backdrop-blur-xl text-[#F2EFE9] shadow-[0_18px_40px_-10px_rgba(0,0,0,0.8),0_0_24px_-6px_rgba(79,227,181,0.35)] hover:border-[#4FE3B5] transition-all cursor-pointer active:scale-[0.97]"
+  >
+    <span class="relative flex h-3 w-3" aria-hidden="true">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4FE3B5] opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-3 w-3 bg-[#4FE3B5]"></span>
+    </span>
+    <span class="font-display font-semibold text-sm tracking-tight">Ask RAG AI</span>
+    <span class="font-mono-tech text-[10px] px-2 py-0.5 rounded-full bg-[#4FE3B5]/15 text-[#4FE3B5] border border-[#4FE3B5]/25">
+      Groq + Graph
+    </span>
+  </button>
+</div>
+
+<!-- Real-Time LangChain + LangGraph RAG Chatbot + Direct WhatsApp Drawer -->
+<div
+  id="identity-chatbot-modal"
+  data-api-base={chatApiBase}
+  data-whatsapp-url={PROFILE.whatsappUrl}
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="chatbot-title"
+  class="fixed inset-0 z-[95] hidden items-end sm:items-center justify-center p-0 sm:p-6 bg-[#080B0A]/82 backdrop-blur-lg"
+>
+  <div id="chatbot-backdrop" class="absolute inset-0"></div>
+
+  <div class="relative z-10 w-full sm:max-w-2xl h-[93dvh] sm:h-[85dvh] bezel-outer flex flex-col sm:rounded-[28px] rounded-b-none">
+    <div class="bezel-inner flex-1 flex flex-col overflow-hidden sm:rounded-[22px] rounded-b-none">
+      <!-- Top Header -->
+      <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-4 border-b border-[rgba(242,239,233,0.09)] bg-[#0B0F0D]">
+        <div class="space-y-0.5">
+          <div class="flex items-center gap-2">
+            <span id="chatbot-status-dot" class="w-2 h-2 rounded-full bg-[#E8B88A]" aria-hidden="true"></span>
+            <span id="chatbot-api-status" class="font-mono-tech text-[10px] uppercase tracking-[0.14em] text-[#E8B88A]">
+              Connecting to Python LangGraph RAG API...
+            </span>
+          </div>
+          <h3 id="chatbot-title" class="font-display font-bold text-lg text-[#F2EFE9]">
+            Hashir Portfolio RAG Agent · Live LLM + WhatsApp
+          </h3>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            id="chatbot-wa-mode-btn"
+            type="button"
+            class="min-h-[40px] px-3 rounded-xl border border-[#E8B88A]/40 bg-[#E8B88A]/10 font-mono-tech text-[11px] text-[#E8B88A] hover:bg-[#E8B88A] hover:text-[#080B0A] transition-colors cursor-pointer"
+          >
+            WhatsApp Direct ↗
+          </button>
+          <button
+            id="chatbot-run-suite"
+            type="button"
+            class="min-h-[40px] px-3 rounded-xl border border-[#4FE3B5]/35 bg-[#4FE3B5]/10 font-mono-tech text-[11px] text-[#4FE3B5] hover:bg-[#4FE3B5] hover:text-[#06130F] transition-colors cursor-pointer"
+          >
+            Test RAG API
+          </button>
+          <button
+            id="chatbot-close"
+            type="button"
+            aria-label="Close Identity Chatbot"
+            class="w-10 h-10 rounded-full border border-[rgba(242,239,233,0.14)] bg-[#0F1412] text-[#F2EFE9] inline-flex items-center justify-center cursor-pointer hover:border-[#4FE3B5]/50"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Always-Accessible 1-Click Direct WhatsApp Strip (for visitors who don't know how to use AI or want direct help) -->
+      <div class="px-4 sm:px-5 py-2.5 border-b border-[rgba(242,239,233,0.08)] bg-[#151C19]/85 flex flex-wrap items-center justify-between gap-2">
+        <span class="text-xs text-[#B6C2BC]">
+          Need a human reply or unsure what to ask? Forward any question straight to Hashir.
+        </span>
+        <a
+          id="chatbot-direct-wa-link"
+          href={`${PROFILE.whatsappUrl}?text=${encodeURIComponent("Hi Hashir, I'm visiting your portfolio and would like to connect directly.")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#4FE3B5]/15 border border-[#4FE3B5]/40 font-mono-tech text-[11px] text-[#4FE3B5] hover:bg-[#4FE3B5] hover:text-[#06130F] transition-colors"
+        >
+          <span>Message {PROFILE.phoneDisplay} on WhatsApp</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <!-- Quick Prompt Chips -->
+      <div class="px-4 py-2.5 border-b border-[rgba(242,239,233,0.07)] bg-[#0F1412] flex items-center gap-2 overflow-x-auto">
+        <span class="font-mono-tech text-[10px] uppercase tracking-[0.12em] text-[#85948D] shrink-0">
+          Ask RAG:
+        </span>
+        {quickPrompts.map((q) => (
+          <button
+            type="button"
+            data-chat-preset={q}
+            class="shrink-0 min-h-[34px] px-3 rounded-full border border-[rgba(242,239,233,0.12)] bg-[#080B0A] font-mono-tech text-[11px] text-[#B6C2BC] hover:text-[#4FE3B5] hover:border-[#4FE3B5]/45 transition-colors cursor-pointer"
+          >
+            {q}
+          </button>
+        ))}
+      </div>
+
+      <!-- Quick Direct WhatsApp Forwarder Panel (toggled via "WhatsApp Direct ↗") -->
+      <div id="chatbot-wa-panel" class="hidden p-4 sm:p-5 border-b border-[#E8B88A]/25 bg-[#0F1412] space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="font-mono-tech text-[11px] uppercase tracking-[0.14em] text-[#E8B88A]">
+            Forward Message Directly to Hashir’s WhatsApp
+          </div>
+          <button
+            id="chatbot-wa-panel-close"
+            type="button"
+            class="font-mono-tech text-[11px] text-[#85948D] hover:text-[#F2EFE9] cursor-pointer"
+          >
+            Hide
+          </button>
+        </div>
+        <form id="chatbot-wa-forward-form" class="space-y-2.5">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <input
+              id="wa-visitor-name"
+              type="text"
+              placeholder="Your name (optional)"
+              class="min-h-[42px] px-3.5 rounded-xl border border-[rgba(242,239,233,0.12)] bg-[#080B0A] text-xs text-[#F2EFE9] placeholder-[#85948D]"
+            />
+            <input
+              id="wa-visitor-msg"
+              type="text"
+              required
+              placeholder="Write your question or project note for Hashir..."
+              class="sm:col-span-2 min-h-[42px] px-3.5 rounded-xl border border-[rgba(242,239,233,0.12)] bg-[#080B0A] text-xs text-[#F2EFE9] placeholder-[#85948D]"
+            />
+          </div>
+          <div class="flex justify-end">
+            <button
+              type="submit"
+              class="min-h-[40px] px-4 rounded-xl bg-[#E8B88A] text-[#080B0A] font-mono-tech text-xs font-medium cursor-pointer hover:opacity-95"
+            >
+              Forward to WhatsApp ({PROFILE.phoneDisplay}) ↗
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Messages Transcript -->
+      <div
+        id="chatbot-messages"
+        aria-live="polite"
+        class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 bg-[#080B0A]"
+      >
+        <div class="rounded-2xl border border-[#4FE3B5]/25 bg-[#0F1412] p-4 space-y-2 max-w-[94%]">
+          <div class="flex items-center justify-between gap-2 font-mono-tech text-[10px] uppercase tracking-[0.12em] text-[#4FE3B5]">
+            <span>Real-Time LangChain Vector RAG + Groq LLM</span>
+            <span>My_cv.pdf · Portfolio · GitHub</span>
+          </div>
+          <p class="text-sm text-[#F2EFE9] leading-relaxed">
+            Ask any real question about Hashir Ahmad — his projects, Wrapify Solutions internship, UET Peshawar CS degree (3.45 GPA), certifications, or live GitHub activity. Answers are generated live by Groq LLM grounded in indexed RAG chunks from his CV and portfolio.
+          </p>
+          <p class="text-xs text-[#85948D]">
+            If you have any custom inquiry, technical issue, or want to speak directly, click <strong class="text-[#E8B88A] font-normal">WhatsApp Direct ↗</strong> anytime to forward your message straight to Hashir.
+          </p>
+        </div>
+      </div>
+
+      <!-- Input Composer -->
+      <form id="chatbot-form" class="p-3.5 sm:p-4 border-t border-[rgba(242,239,233,0.09)] bg-[#0B0F0D] flex items-center gap-2.5">
+        <label for="chatbot-input" class="sr-only">Ask Hashir RAG AI</label>
+        <input
+          id="chatbot-input"
+          type="text"
+          autocomplete="off"
+          placeholder="Ask any real question about Hashir or his work..."
+          class="flex-1 min-h-[46px] px-4 rounded-xl border border-[rgba(242,239,233,0.14)] bg-[#080B0A] text-sm text-[#F2EFE9] placeholder-[#85948D] focus:border-[#4FE3B5]"
+        />
+        <button
+          id="chatbot-send-btn"
+          type="submit"
+          class="min-h-[46px] px-5 rounded-xl bg-[#4FE3B5] text-[#06130F] font-mono-tech text-xs font-medium cursor-pointer hover:opacity-95 active:scale-[0.97] transition-all shrink-0"
+        >
+          Ask RAG ↗
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

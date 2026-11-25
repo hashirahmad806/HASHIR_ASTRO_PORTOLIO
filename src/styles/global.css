@@ -1,0 +1,342 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-void: #080b0a;
+    --bg-surface: #0f1412;
+    --bg-elevated: #151c19;
+    --bg-recessed: #0b0f0d;
+    --bg-glass: rgba(15, 20, 18, 0.78);
+
+    --text-primary: #f2efe9;
+    --text-secondary: #b6c2bc;
+    --text-muted: #85948d;
+
+    --accent-jade: #4fe3b5;
+    --accent-jade-rgb: 79, 227, 181;
+    --accent-jade-dim: rgba(79, 227, 181, 0.14);
+    --on-accent-jade: #06130f;
+
+    --accent-copper: #e8b88a;
+    --accent-copper-rgb: 232, 184, 138;
+    --accent-copper-dim: rgba(232, 184, 138, 0.14);
+
+    --border-hairline: rgba(242, 239, 233, 0.08);
+    --border-strong: rgba(242, 239, 233, 0.16);
+    --border-jade: rgba(79, 227, 181, 0.34);
+
+    --font-display: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
+    --font-editorial: "Newsreader", Georgia, serif;
+    --font-body: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    --font-mono: "DM Mono", ui-monospace, SFMono-Regular, monospace;
+
+    --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-lens: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html {
+    background-color: var(--bg-void);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-void);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.65;
+  }
+
+  /* Accessible visible focus indicator (WCAG 2.2 AA/AAA) */
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 2px solid var(--accent-jade);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background-color: rgba(79, 227, 181, 0.24);
+    color: var(--text-primary);
+  }
+}
+
+/* Fixed hardware-safe atmospheric grain overlay (never attached to scrolling nodes) */
+.nocturne-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Typography Helpers */
+.font-display {
+  font-family: var(--font-display);
+}
+.font-editorial {
+  font-family: var(--font-editorial);
+}
+.font-body {
+  font-family: var(--font-body);
+}
+.font-mono-tech {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Machined Double-Bezel Hardware Shell */
+.bezel-outer {
+  background: linear-gradient(155deg, rgba(242, 239, 233, 0.04) 0%, rgba(15, 20, 18, 0.72) 100%);
+  border: 1px solid var(--border-hairline);
+  border-radius: 28px;
+  padding: 6px;
+  box-shadow:
+    0 24px 56px -18px rgba(0, 0, 0, 0.72),
+    inset 0 1px 0 rgba(242, 239, 233, 0.06);
+  transition: border-color 0.35s var(--ease-apple), transform 0.45s var(--ease-apple);
+}
+
+.bezel-inner {
+  background-color: var(--bg-elevated);
+  border-radius: 22px;
+  border: 1px solid rgba(242, 239, 233, 0.045);
+  box-shadow: inset 0 1px 0 rgba(242, 239, 233, 0.055);
+  position: relative;
+  overflow: hidden;
+}
+
+.bezel-outer:hover {
+  border-color: rgba(79, 227, 181, 0.25);
+}
+
+/* Google Lens Optical Reticle & Spotlight Layer */
+.lens-surface {
+  --lens-x-num: 180;
+  --lens-y-num: 140;
+  --lens-opacity: 0;
+  position: relative;
+}
+
+.lens-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--lens-opacity);
+  transition: opacity 0.32s var(--ease-lens);
+  background: radial-gradient(
+    280px circle at calc(var(--lens-x-num, 180) * 1px) calc(var(--lens-y-num, 140) * 1px),
+    rgba(79, 227, 181, 0.13),
+    rgba(232, 184, 138, 0.045) 45%,
+    transparent 75%
+  );
+  z-index: 1;
+}
+
+.lens-surface:hover,
+.lens-inspect-active .lens-surface {
+  --lens-opacity: 1;
+}
+
+.lens-corners {
+  pointer-events: none;
+  position: absolute;
+  inset: 12px;
+  z-index: 3;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 0.32s var(--ease-apple), transform 0.38s var(--ease-apple);
+}
+
+.lens-surface:hover .lens-corners,
+.lens-surface:focus-within .lens-corners,
+.lens-inspect-active .lens-surface .lens-corners {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.lens-corners span {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--accent-jade);
+  border-style: solid;
+}
+
+.lens-corners span:nth-child(1) {
+  top: 0;
+  left: 0;
+  border-width: 1.5px 0 0 1.5px;
+  border-top-left-radius: 5px;
+}
+.lens-corners span:nth-child(2) {
+  top: 0;
+  right: 0;
+  border-width: 1.5px 1.5px 0 0;
+  border-top-right-radius: 5px;
+}
+.lens-corners span:nth-child(3) {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 1.5px 1.5px;
+  border-bottom-left-radius: 5px;
+}
+.lens-corners span:nth-child(4) {
+  bottom: 0;
+  right: 0;
+  border-width: 0 1.5px 1.5px 0;
+  border-bottom-right-radius: 5px;
+}
+
+/* Global Lens Inspect Mode reveals subtle technical overlays */
+.lens-telemetry-chip {
+  opacity: 0.78;
+  transition: opacity 0.25s var(--ease-apple), border-color 0.25s var(--ease-apple), color 0.25s var(--ease-apple);
+}
+
+.lens-inspect-active .lens-telemetry-chip {
+  opacity: 1;
+  border-color: var(--border-jade);
+  color: var(--accent-jade);
+}
+
+/* Optical Scan Beam (subtle sweep inside portrait or inspected lens panels) */
+@keyframes optical-scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.65;
+  }
+  82% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translateY(420%);
+    opacity: 0;
+  }
+}
+
+.optical-scan-beam {
+  animation: optical-scan 4.8s var(--ease-apple) infinite;
+}
+
+/* Tactile Fitts-compliant Interactive Pills */
+.btn-jade-island {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 6px 8px 6px 22px;
+  border-radius: 9999px;
+  background-color: var(--accent-jade);
+  color: var(--on-accent-jade);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 10px 28px -10px rgba(79, 227, 181, 0.45);
+  transition: transform 0.22s var(--ease-apple), box-shadow 0.28s var(--ease-apple), background-color 0.22s ease;
+  cursor: pointer;
+}
+
+.btn-jade-island:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 16px 34px -10px rgba(79, 227, 181, 0.56);
+}
+
+.btn-jade-island:active {
+  transform: scale(0.97);
+}
+
+.btn-jade-island .btn-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background-color: rgba(6, 19, 15, 0.14);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s var(--ease-apple), background-color 0.25s ease;
+}
+
+.btn-jade-island:hover .btn-badge {
+  transform: translate(2px, -2px) scale(1.06);
+  background-color: rgba(6, 19, 15, 0.22);
+}
+
+.btn-basalt-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 20px;
+  border-radius: 9999px;
+  background-color: rgba(21, 28, 25, 0.85);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: inset 0 1px 0 rgba(242, 239, 233, 0.06);
+  transition: transform 0.22s var(--ease-apple), border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-basalt-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-jade);
+  color: var(--accent-jade);
+  background-color: rgba(21, 28, 25, 1);
+}
+
+.btn-basalt-pill:active {
+  transform: scale(0.97);
+}
+
+/* Custom thin scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-void);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(79, 227, 181, 0.28);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 227, 181, 0.5);
+}
+
+/* Respect Reduced Motion strictly */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .optical-scan-beam {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+  .lens-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}

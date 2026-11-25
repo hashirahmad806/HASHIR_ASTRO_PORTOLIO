@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="16" fill="#080B0A"/>
+  <rect x="2" y="2" width="60" height="60" rx="14" stroke="#4FE3B5" stroke-opacity="0.28" stroke-width="1.5"/>
+  <!-- Optical Lens Corner Brackets -->
+  <path d="M14 22V16C14 14.8954 14.8954 14 16 14H22" stroke="#4FE3B5" stroke-width="2" stroke-linecap="round"/>
+  <path d="M42 14H48C49.1046 14 50 14.8954 50 16V22" stroke="#4FE3B5" stroke-width="2" stroke-linecap="round"/>
+  <path d="M50 42V48C50 49.1046 49.1046 50 48 50H42" stroke="#E8B88A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M22 50H16C14.8954 50 14 49.1046 14 48V42" stroke="#E8B88A" stroke-width="2" stroke-linecap="round"/>
+  <!-- Monogram HA -->
+  <path d="M21 41V23H24.6V30.4H33.4V23H37V41H33.4V33.6H24.6V41H21Z" fill="#F2EFE9"/>
+  <circle cx="43.5" cy="39" r="3" fill="#4FE3B5"/>
+</svg>

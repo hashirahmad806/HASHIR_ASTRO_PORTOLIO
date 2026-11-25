@@ -1,0 +1,60 @@
+---
+import { PROFILE } from '../data/portfolio';
+---
+
+<section
+  aria-label="Recruiter Quick Snapshot"
+  class="py-6 sm:py-8 border-y border-[rgba(242,239,233,0.08)] bg-[#0B0F0D]/90"
+>
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+      <div class="lens-reveal space-y-1">
+        <div class="font-mono-tech text-[10px] uppercase tracking-[0.18em] text-[#4FE3B5]">
+          01 / Role Focus
+        </div>
+        <div class="font-display font-semibold text-[15px] text-[#F2EFE9]">
+          Full-Stack & Agentic AI
+        </div>
+        <p class="text-xs text-[#85948D]">
+          Astro, React 19, Node.js, LangGraph, RAG
+        </p>
+      </div>
+
+      <div class="lens-reveal space-y-1">
+        <div class="font-mono-tech text-[10px] uppercase tracking-[0.18em] text-[#E8B88A]">
+          02 / Education
+        </div>
+        <div class="font-display font-semibold text-[15px] text-[#F2EFE9]">
+          {PROFILE.education.degree}
+        </div>
+        <p class="text-xs text-[#85948D]">
+          UET Peshawar · CGPA {PROFILE.education.cgpa}
+        </p>
+      </div>
+
+      <div class="lens-reveal space-y-1">
+        <div class="font-mono-tech text-[10px] uppercase tracking-[0.18em] text-[#4FE3B5]">
+          03 / Production Tenure
+        </div>
+        <div class="font-display font-semibold text-[15px] text-[#F2EFE9]">
+          Wrapify Solutions (Intern)
+        </div>
+        <p class="text-xs text-[#85948D]">
+          Nov 2025 – Jan 2026 + Client Deliveries
+        </p>
+      </div>
+
+      <div class="lens-reveal space-y-1">
+        <div class="font-mono-tech text-[10px] uppercase tracking-[0.18em] text-[#E8B88A]">
+          04 / Human Factors & Security
+        </div>
+        <div class="font-display font-semibold text-[15px] text-[#F2EFE9]">
+          Duke HCI · Microsoft · IBM
+        </div>
+        <p class="text-xs text-[#85948D]">
+          8 Verified Enterprise & University Certs
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,162 @@
+---
+import '../styles/global.css';
+import { PROFILE, PROJECTS, CERTIFICATIONS } from '../data/portfolio';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${PROFILE.name} — ${PROFILE.role} | Astro, Full-Stack & Agentic AI`,
+  description = `${PROFILE.name} is a Computer Science undergraduate at UET Peshawar (3.45 CGPA) and former Full-Stack Intern at Wrapify Solutions building fast Astro/React web platforms, LangGraph agents, and RAG pipelines.`,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, PROFILE.siteUrl).toString();
+const ogImageUrl = new URL('/hashir.jpg', PROFILE.siteUrl).toString();
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${PROFILE.siteUrl}/#website`,
+      url: PROFILE.siteUrl,
+      name: `${PROFILE.name} Portfolio`,
+      description,
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': `${PROFILE.siteUrl}/#profilepage`,
+      url: canonicalUrl,
+      name: title,
+      mainEntity: { '@id': `${PROFILE.siteUrl}/#person` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${PROFILE.siteUrl}/#person`,
+      name: PROFILE.name,
+      jobTitle: PROFILE.role,
+      url: PROFILE.siteUrl,
+      image: ogImageUrl,
+      email: `mailto:${PROFILE.email}`,
+      sameAs: [PROFILE.githubUrl, PROFILE.linkedinUrl],
+      affiliation: {
+        '@type': 'CollegeOrUniversity',
+        name: PROFILE.education.institution,
+      },
+      knowsAbout: [
+        'Full-Stack Web Development',
+        'Astro',
+        'React.js',
+        'TypeScript',
+        'Node.js',
+        'MongoDB Atlas Vector Search',
+        'LangChain',
+        'LangGraph',
+        'Retrieval-Augmented Generation (RAG)',
+        'Computer Vision',
+        'Deep Learning',
+        'Human Factors in AI',
+        'GSAP Animation',
+      ],
+      hasCredential: CERTIFICATIONS.map((c) => ({
+        '@type': 'EducationalOccupationalCredential',
+        name: c.title,
+        recognizedBy: { '@type': 'Organization', name: c.issuer },
+        url: c.verifyUrl || undefined,
+      })),
+    },
+    {
+      '@type': 'ItemList',
+      '@id': `${PROFILE.siteUrl}/#projects`,
+      name: 'Featured Software & AI Systems',
+      itemListElement: PROJECTS.slice(0, 6).map((p, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'SoftwareApplication',
+          name: p.title,
+          applicationCategory: 'WebApplication',
+          description: p.shortDesc,
+          url: p.liveUrl,
+          author: { '@id': `${PROFILE.siteUrl}/#person` },
+        },
+      })),
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="Hashir Ahmad, Full-Stack Engineer, AI Systems Engineer, Astro Developer, LangGraph, RAG Vector Search, MERN Stack, UET Peshawar, Wrapify Solutions, Human Factors in AI"
+    />
+    <meta name="author" content={PROFILE.name} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#080B0A" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Fonts: Bricolage Grotesque + Newsreader + Plus Jakarta Sans + DM Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+
+  <body class="bg-[#080B0A] text-[#F2EFE9] antialiased selection:bg-[#4FE3B5]/25">
+    <!-- Accessible Skip Navigation -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:rounded-full focus:bg-[#4FE3B5] focus:text-[#06130F] focus:font-semibold"
+    >
+      Skip to main content
+    </a>
+
+    <!-- Scroll Progress Hairline -->
+    <div
+      id="scroll-progress-bar"
+      aria-hidden="true"
+      class="fixed top-0 left-0 right-0 h-[2px] z-[60] origin-left scale-x-0 pointer-events-none"
+      style="background: linear-gradient(90deg, #4FE3B5 0%, #E8B88A 100%);"
+    ></div>
+
+    <!-- Atmospheric Nocturne Grain -->
+    <div class="nocturne-grain" aria-hidden="true"></div>
+
+    <slot />
+
+    <script>
+      import { initOpticalMotion } from '../scripts/optical-motion';
+      initOpticalMotion();
+    </script>
+  </body>
+</html>
